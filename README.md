@@ -1,83 +1,128 @@
-# EvaluacionFinal
-#  Mini-Framework Híbrido de Testing
-Framework de pruebas basado en Jasmine con funcionalidades avanzadas para pruebas de integración, mocking y validación de tipos.
+# Framework Híbrido de Testing con Python y JavaScript
 
-<img width="648" height="432" alt="image" src="https://github.com/user-attachments/assets/54932728-b944-4d01-bfc5-af9183aab80c" />
+Framework de pruebas que combina técnicas avanzadas de testing en **Python** (pytest, Hypothesis, mutmut) y **JavaScript** (Jasmine), aplicadas sobre una calculadora con historial y cálculo de impuestos. Incluye pruebas basadas en propiedades, mutation testing, contract testing, pruebas combinatorias y análisis de confiabilidad.
 
-##  Descripcion 
-Este proyecto implementa un mini-framework híbrido que extiende las capacidades de Jasmine, proporcionando: 
-#### Pruebas de integración automática con gestión de contexto
+---
 
-<img width="791" height="473" alt="image" src="https://github.com/user-attachments/assets/e16ed547-54a8-4521-a47d-0c66c69c192e" />
+## Descripción general
 
-#### Mocking avanzado con espías personalizados
+Este proyecto implementa un mini-framework híbrido que extiende las capacidades de Jasmine y pytest, proporcionando:
 
-<img width="840" height="460" alt="image" src="https://github.com/user-attachments/assets/bcf877f6-63e5-4c36-8063-feb547754e5c" />
+- **Pruebas de integración** con gestión de contexto y dependencias
+- **Mocking avanzado** con espías personalizados (Jasmine Spies)
+- **Generación de pruebas basada en tipos** con validación automática
+- **Property-based testing** con Hypothesis (Python)
+- **Mutation testing** con mutmut (score objetivo: >78%)
+- **Pruebas combinatorias** para sistema de admisión hospitalaria
+- **Modelo predictivo de confiabilidad** con simulación Monte Carlo
 
-#### Generación de pruebas basada en tipos con validación automática
+---
 
-<img width="796" height="618" alt="image" src="https://github.com/user-attachments/assets/63a52278-bc96-44fb-b783-9b3ef9a594cf" />
+## Componentes del proyecto
 
-<img width="1919" height="1011" alt="image" src="https://github.com/user-attachments/assets/a825e8f2-157a-471d-a081-9969d3389ce8" />
+### Módulo JavaScript — ServicioCalculadora
 
+Calculadora con operaciones básicas (sumar, restar, multiplicar, dividir), cálculo de impuestos mediante servicio externo y registro completo de historial de operaciones. Implementa **inyección de dependencias** para facilitar mocks y espías en Jasmine.
 
-##  Instalación
-### Instalar dependencias
+### Módulo Python — Búsqueda Binaria
+
+Implementación iterativa y recursiva del algoritmo de búsqueda binaria con análisis de complejidad ciclomática (Radon) y pruebas de mutación.
+
+### Sistema de Admisión Hospitalaria
+
+Sistema de pruebas combinatorias con Pairwise para validar reglas de negocio:
+
+| Factor | Valores |
+|---|---|
+| Tipo de Paciente | Adulto, Niño, Adulto mayor |
+| Servicio | Consulta, Emergencia |
+| Fecha | 5 fechas distintas |
+| Prioridad | 1, 3 |
+
+Resultado: **15 casos Pairwise** de 60 posibles (reducción del 75%), tasa de admisión del **80%**.
+
+### Modelo Predictivo de Confiabilidad
+
+Modelo híbrido que combina regresión logarítmica y simulación Monte Carlo (5000 iteraciones) para predecir defectos futuros y calcular un score integrado de confiabilidad por módulo:
+
+| Módulo | Score (0-100) |
+|---|---|
+| autenticacion | 99.6 |
+| triage | 36.6 |
+| admision | 22.6 |
+| reportes | 15.0 |
+| facturacion | 1.5 |
+
+---
+
+## Estructura del proyecto
+
+```
+framework-hibrido-testing-python-javascript/
+├── src/
+│   ├── js/servicios/         # ServicioCalculadora (JavaScript)
+│   └── python/               # Búsqueda binaria (Python)
+├── spec/                     # Pruebas Jasmine (JavaScript)
+├── tests/                    # Pruebas pytest (Python)
+├── .hypothesis/              # Configuración property-based testing
+├── mutants/                  # Resultados mutation testing
+├── cobertura/                # Reportes de cobertura
+├── analisis_estatico/        # Análisis complejidad ciclomática
+├── makefile                  # Automatización de tareas
+└── package.json              # Dependencias JavaScript
+```
+
+---
+
+## Instalación
+
+```bash
+# Clonar el repositorio
+git clone https://github.com/norah30/framework-hibrido-testing-python-javascript.git
+cd framework-hibrido-testing-python-javascript
+
+# Dependencias JavaScript
 npm install
-### Ejecutar pruebas
+
+# Dependencias Python
+pip install pytest pytest-cov hypothesis mutmut allpairspy pylint radon numpy pandas matplotlib scikit-learn
+```
+
+---
+
+## Uso
+
+```bash
+# Pruebas JavaScript (Jasmine)
 npm test
 
-<img width="874" height="629" alt="image" src="https://github.com/user-attachments/assets/cc6059d5-dc10-403f-95fa-5345a5daa817" />
+# Pruebas Python con cobertura
+pytest --cov=src/python
 
-# Extensión del Algoritmo de Búsqueda Binaria
-Implementación de búsqueda binaria con pruebas avanzadas
+# Mutation testing
+mutmut run
+mutmut results
 
-<img width="835" height="527" alt="image" src="https://github.com/user-attachments/assets/822ce84b-2f5f-4f45-b191-64f9bb023cf4" />
+# Análisis estático
+pylint src/python/
+```
 
-##  Descripcion 
-Este proyecto extiende el algoritmo de búsqueda binaria con un conjunto completo de pruebas que garantizan su correctitud y robustez.
+---
 
-#### Property-based testing
+## Resultados de calidad
 
-<img width="1181" height="370" alt="image" src="https://github.com/user-attachments/assets/e8d7a91e-a07a-4e67-9c51-5a8317301045" />
+| Técnica | Resultado |
+|---|---|
+| Cobertura pytest | 92% |
+| Mutation score (mutmut) | 78.9% (30 killed / 8 survived) |
+| Casos Pairwise generados | 15 de 60 posibles |
+| Tasa de admisión hospitalaria | 80% |
+| Simulaciones Monte Carlo | 5000 por módulo |
 
-#### Mutation testing.
+---
 
-<img width="735" height="393" alt="image" src="https://github.com/user-attachments/assets/ee83697b-d725-4dfe-88b5-eaa7cb99b417" />
+## Tecnologías
 
-#### Contract testing.
+**Python:** pytest, pytest-cov, Hypothesis, mutmut, allpairspy, Radon, NumPy, Pandas, Matplotlib, scikit-learn
 
-<img width="1182" height="212" alt="image" src="https://github.com/user-attachments/assets/02e35536-84f3-41d7-bc3a-1301da16b3ea" />
-
-##  Instalación
-### Instalar dependencias
-pip install pytest hypothesis icontract mutmut
-### Ejecutar pruebas
-pytest
-
-# Métricas Avanzadas de Calidad
-Implementación de un sistema de métricas para evaluar la calidad del código y de las pruebas del algoritmo de búsqueda binaria, más allá de la cobertura tradicional.
-
-##  Descripcion 
-Analizar la calidad del software y del proceso de testing mediante métricas avanzadas que permitan, evaluar la complejidad, detectar pruebas inestables, medir la escala de rendimiento, analiyar la relacion entre cobertura de codigo y deteccion real de defectos
-
-#### Detección de pruebas inestables (Flaky Tests)
-
-<img width="806" height="136" alt="image" src="https://github.com/user-attachments/assets/4aa44438-2e0d-4a5a-bcc0-09f090e05b7f" />
-
-#### Análisis de tiempo de ejecución
-
-<img width="770" height="339" alt="image" src="https://github.com/user-attachments/assets/8620ffb8-822e-4dc3-8ced-940bdbdef60e" />
-
-####  Relación entre cobertura y defectos detectados
-
-<img width="788" height="301" alt="image" src="https://github.com/user-attachments/assets/34bb147e-10b5-43e2-95d0-8868479cf0d9" />
-
-####  Complejidad ciclomática por prueba
-
-<img width="777" height="238" alt="image" src="https://github.com/user-attachments/assets/f7dad988-af05-468a-81d9-c005c03cd0f6" />
-
-
-
-
-
+**JavaScript:** Jasmine, Node.js
