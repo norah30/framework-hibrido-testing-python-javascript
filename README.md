@@ -13,8 +13,6 @@ Este proyecto implementa un mini-framework híbrido que extiende las capacidades
 - **Generación de pruebas basada en tipos** con validación automática
 - **Property-based testing** con Hypothesis (Python)
 - **Mutation testing** con mutmut (score objetivo: >78%)
-- **Pruebas combinatorias** para sistema de admisión hospitalaria
-- **Modelo predictivo de confiabilidad** con simulación Monte Carlo
 
 ---
 
@@ -28,32 +26,6 @@ Calculadora con operaciones básicas (sumar, restar, multiplicar, dividir), cál
 
 Implementación iterativa y recursiva del algoritmo de búsqueda binaria con análisis de complejidad ciclomática (Radon) y pruebas de mutación.
 
-### Sistema de Admisión Hospitalaria
-
-Sistema de pruebas combinatorias con Pairwise para validar reglas de negocio:
-
-| Factor | Valores |
-|---|---|
-| Tipo de Paciente | Adulto, Niño, Adulto mayor |
-| Servicio | Consulta, Emergencia |
-| Fecha | 5 fechas distintas |
-| Prioridad | 1, 3 |
-
-Resultado: **15 casos Pairwise** de 60 posibles (reducción del 75%), tasa de admisión del **80%**.
-
-### Modelo Predictivo de Confiabilidad
-
-Modelo híbrido que combina regresión logarítmica y simulación Monte Carlo (5000 iteraciones) para predecir defectos futuros y calcular un score integrado de confiabilidad por módulo:
-
-| Módulo | Score (0-100) |
-|---|---|
-| autenticacion | 99.6 |
-| triage | 36.6 |
-| admision | 22.6 |
-| reportes | 15.0 |
-| facturacion | 1.5 |
-
----
 
 ## Estructura del proyecto
 
@@ -116,8 +88,6 @@ pylint src/python/
 | Cobertura pytest | 92% |
 | Mutation score (mutmut) | 78.9% (30 killed / 8 survived) |
 | Casos Pairwise generados | 15 de 60 posibles |
-| Tasa de admisión hospitalaria | 80% |
-| Simulaciones Monte Carlo | 5000 por módulo |
 
 ---
 
